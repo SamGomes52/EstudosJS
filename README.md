@@ -1,5 +1,5 @@
 # Estudos JS
-## Mini projetos que fiz durante meus estudos de JavaScript.
+Mini projetos que fiz durante meus estudos de JavaScript.
 
 <h4 align="center"> 
 	🚧  Em construção...  🚧
