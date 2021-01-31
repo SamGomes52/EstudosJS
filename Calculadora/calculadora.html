@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <style>
+        div {
+            margin: 1em;
+            width: 230px;
+        }
+        div#calc {
+            border: 2px solid black;
+            width: 265px;
+        }
+        input {
+            width: 70px;
+            margin: 2px;
+        }
+        input#botaoIgual, input#botaoLimpar {
+            width: 148px;
+        }
+        
+        div#tela {
+            background-color: gray;
+            height: 30px;
+            width: 225px;
+            color: white;
+            text-align: end;
+            line-height: 30px;
+            padding-right: 5px;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div id="calc">
+        <div id="tela">
+            0
+        </div>
+        <div>
+            <input type="button" value="1" onclick="numeros(1)">
+            <input type="button" value="2" onclick="numeros(2)">
+            <input type="button" value="3" onclick="numeros(3)">
+            <input type="button" value="4" onclick="numeros(4)">
+            <input type="button" value="5" onclick="numeros(5)">
+            <input type="button" value="6" onclick="numeros(6)">
+            <input type="button" value="7" onclick="numeros(7)">
+            <input type="button" value="8" onclick="numeros(8)">
+            <input type="button" value="9" onclick="numeros(9)">
+            <input type="button" value="0" onclick="numeros(0)">
+            <input type="button" value="Limpar" id="botaoLimpar" onclick="limpar()">
+        </div>
+        <div>
+            <input type="button" value="+" onclick="operacoes('+')">
+            <input type="button" value="-" onclick="operacoes('-')">
+            <input type="button" value="*" onclick="operacoes('*')">
+            <input type="button" value="/" onclick="operacoes('/')">
+            <input type="button" value="=" id="botaoIgual" onclick="operacoes('=')">
+        </div>
+    </div>
+
+    <script>
+        var valorAtual = '';
+        var valor2 = '';
+        var op1 = '';
+        var caixaTela = window.document.getElementById('tela')
+
+        function numeros(valor) {
+            if(op1 == '='){ //caso o usuario digite um numero depois de clicar em '='
+                valor2 = ''
+                op1 = ''
+            }
+            String(valor);
+            valorAtual += valor;
+            caixaTela.innerHTML = `${valor2} ${op1} ${valorAtual}`;
+        }
+        function operacoes(operacao) {
+            if(valor2 == ''){
+                op1 = operacao
+                valor2 = valorAtual
+                valorAtual = ''
+                caixaTela.innerHTML = `${valor2} ${operacao}`
+            }
+            else {
+                if(op1 == '+') {
+                    valor2 = Number(valor2) + Number(valorAtual)
+                    valorAtual = '';
+                }
+                else if(op1 == '-') {
+                    valor2 = Number(valor2) - Number(valorAtual)
+                    valorAtual = '';
+                }
+                else if(op1 == '*') {
+                    valor2 = Number(valor2) * Number(valorAtual)
+                    valorAtual = '';
+                }
+                else if(op1 == '/') {
+                    valor2 = Number(valor2) / Number(valorAtual)
+                    valorAtual = '';
+                    
+                }
+                if(operacao != '='){
+                    caixaTela.innerHTML = `${valor2} ${operacao}`
+                }
+                else {
+                    caixaTela.innerHTML = `${operacao} ${valor2}`
+                }
+                op1 = operacao;
+            }
+            
+            
+        }
+        function limpar() {
+            valorAtual = ''
+            valor2 = ''
+            op1 = ''
+            caixaTela.innerText = 0;
+        }
+    </script>
+</body>
+</html>
